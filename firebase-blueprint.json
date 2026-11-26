@@ -1,0 +1,252 @@
+{
+  "entities": {
+    "UserAccount": {
+      "title": "UserAccount",
+      "description": "Private authenticated user profile including PII (email), bio, avatar, friend UIDs, blocked UIDs, and app preferences.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "description": "Firebase Auth UID of the owner." },
+        "fullName": { "type": "string", "description": "Display full name of the user." },
+        "username": { "type": "string", "description": "Unique lowercase handle without @." },
+        "email": { "type": "string", "description": "Private email address (PII, owner-only)." },
+        "bio": { "type": "string", "description": "Optional user bio text." },
+        "avatarData": { "type": "string", "description": "Compressed profile image data URI or URL." },
+        "online": { "type": "boolean", "description": "Whether the user is currently active online." },
+        "discoverable": { "type": "boolean", "description": "Whether the user appears in People discovery." },
+        "profileCompleted": { "type": "boolean", "description": "Whether initial username/photo/bio setup is complete." },
+        "notificationsEnabled": { "type": "boolean", "description": "Whether local message/call notifications are enabled." },
+        "friendUids": { "type": "array", "description": "List of accepted friend user UIDs (bounded <= 500)." },
+        "blockedUids": { "type": "array", "description": "List of blocked user UIDs (bounded <= 500)." },
+        "defaultDisappearingMs": { "type": "integer", "description": "Global disappearing message timer in milliseconds (0 = off)." },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Server timestamp via FieldValue.serverTimestamp()." },
+        "updatedAt": { "type": "string", "format": "date-time", "description": "Server timestamp via FieldValue.serverTimestamp()." }
+      },
+      "required": ["userId", "fullName", "username", "bio", "online", "discoverable", "profileCompleted", "notificationsEnabled", "friendUids", "createdAt", "updatedAt"]
+    },
+    "PublicProfile": {
+      "title": "PublicProfile",
+      "description": "PII-free public profile used for People discovery, chat presence, and avatar display.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "description": "Owner Firebase Auth UID." },
+        "fullName": { "type": "string", "description": "Display name." },
+        "username": { "type": "string", "description": "Unique lowercase username." },
+        "bio": { "type": "string", "description": "Optional bio." },
+        "avatarData": { "type": "string", "description": "Compressed profile image data URI or URL." },
+        "online": { "type": "boolean", "description": "Live online status." },
+        "discoverable": { "type": "boolean", "description": "Opt-in flag for People directory listing." },
+        "lastSeenAt": { "type": "string", "format": "date-time", "description": "Server timestamp via FieldValue.serverTimestamp()." },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Server timestamp via FieldValue.serverTimestamp()." },
+        "updatedAt": { "type": "string", "format": "date-time", "description": "Server timestamp via FieldValue.serverTimestamp()." }
+      },
+      "required": ["userId", "fullName", "username", "bio", "online", "discoverable", "lastSeenAt", "createdAt", "updatedAt"]
+    },
+    "UsernameClaim": {
+      "title": "UsernameClaim",
+      "description": "Uniqueness reservation document keyed by lowercase username.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "description": "Owner UID who claimed this username." },
+        "username": { "type": "string", "description": "Reserved lowercase username matching document ID." },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Server timestamp via FieldValue.serverTimestamp()." }
+      },
+      "required": ["userId", "username", "createdAt"]
+    },
+    "FriendRequest": {
+      "title": "FriendRequest",
+      "description": "Connection request between two Linkora users.",
+      "type": "object",
+      "properties": {
+        "fromUid": { "type": "string" },
+        "toUid": { "type": "string" },
+        "memberUids": { "type": "array", "description": "2-element array [fromUid, toUid]." },
+        "fromName": { "type": "string" },
+        "fromUsername": { "type": "string" },
+        "fromAvatar": { "type": "string" },
+        "toName": { "type": "string" },
+        "toUsername": { "type": "string" },
+        "toAvatar": { "type": "string" },
+        "status": { "type": "string", "enum": ["pending", "accepted", "declined"] },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["fromUid", "toUid", "memberUids", "fromName", "fromUsername", "toName", "toUsername", "status", "createdAt", "updatedAt"]
+    },
+    "ChatThread": {
+      "title": "ChatThread",
+      "description": "Direct 1-on-1 or Group conversation thread with typing, archive, lock, hidden-delete, and disappearing timers.",
+      "type": "object",
+      "properties": {
+        "memberUids": { "type": "array", "description": "Sorted array of 2..50 participant UIDs." },
+        "memberNames": { "type": "object" },
+        "memberUsernames": { "type": "object" },
+        "memberAvatars": { "type": "object" },
+        "isGroup": { "type": "boolean" },
+        "groupName": { "type": "string" },
+        "typingUsers": { "type": "object", "description": "Map of uid -> boolean indicating real-time typing status." },
+        "archivedBy": { "type": "object", "description": "Map of uid -> boolean for muted archived chats." },
+        "lockedBy": { "type": "object", "description": "Map of uid -> boolean for PIN-locked chats." },
+        "hiddenBy": { "type": "object", "description": "Map of uid -> boolean for deleted-from-list chats (restorable without re-adding)." },
+        "clearedAtMillis": { "type": "object", "description": "Map of uid -> epoch millis when user cleared/deleted chat." },
+        "disappearingDurationMs": { "type": "integer", "description": "Per-chat disappearing timer in ms (0 = off)." },
+        "lastMessageText": { "type": "string" },
+        "lastMessageType": { "type": "string", "enum": ["text", "voice", "photo", "video", "file", "document", "location"] },
+        "lastMessageSenderId": { "type": "string" },
+        "lastMessageStatus": { "type": "string", "enum": ["sent", "delivered", "seen"] },
+        "lastMessageAt": { "type": "string", "format": "date-time" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["memberUids", "memberNames", "memberUsernames", "memberAvatars", "lastMessageText", "lastMessageType", "lastMessageSenderId", "lastMessageStatus", "lastMessageAt", "createdAt", "updatedAt"]
+    },
+    "ChatMessage": {
+      "title": "ChatMessage",
+      "description": "Real-time text, voice, photo, video, file, document, or location message inside a chat thread with delete-for-me and delete-for-everyone support.",
+      "type": "object",
+      "properties": {
+        "chatId": { "type": "string" },
+        "senderId": { "type": "string" },
+        "senderName": { "type": "string" },
+        "receiverId": { "type": "string" },
+        "memberUids": { "type": "array", "description": "Denormalized participant UIDs." },
+        "messageType": { "type": "string", "enum": ["text", "voice", "photo", "video", "file", "document", "location"] },
+        "text": { "type": "string" },
+        "audioData": { "type": "string" },
+        "audioDurationSec": { "type": "integer" },
+        "mediaData": { "type": "string" },
+        "fileData": { "type": "string" },
+        "fileName": { "type": "string" },
+        "fileMimeType": { "type": "string" },
+        "fileSizeBytes": { "type": "integer" },
+        "locationLat": { "type": "number" },
+        "locationLng": { "type": "number" },
+        "locationLabel": { "type": "string" },
+        "deletedForUids": { "type": "array", "description": "UIDs for whom this message is hidden (Delete for me)." },
+        "deletedForEveryone": { "type": "boolean", "description": "Whether sender retracted this message for all participants." },
+        "status": { "type": "string", "enum": ["sent", "delivered", "seen"] },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["chatId", "senderId", "receiverId", "memberUids", "messageType", "text", "audioDurationSec", "status", "createdAt", "updatedAt"]
+    },
+    "StoryItem": {
+      "title": "StoryItem",
+      "description": "24-hour ephemeral story supporting text, photo, video preview, or music with public or friends visibility.",
+      "type": "object",
+      "properties": {
+        "authorId": { "type": "string" },
+        "authorName": { "type": "string" },
+        "authorUsername": { "type": "string" },
+        "authorAvatar": { "type": "string" },
+        "storyType": { "type": "string", "enum": ["text", "photo", "video", "music"] },
+        "caption": { "type": "string" },
+        "mediaData": { "type": "string" },
+        "musicTitle": { "type": "string" },
+        "musicArtist": { "type": "string" },
+        "backgroundHex": { "type": "string" },
+        "visibility": { "type": "string", "enum": ["public", "friends"] },
+        "allowedViewerUids": { "type": "array", "description": "Author UID plus friend UIDs permitted to view friends-only stories." },
+        "expiresAtMillis": { "type": "integer", "description": "Epoch millis 24 hours after posting." },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["authorId", "authorName", "authorUsername", "storyType", "caption", "backgroundHex", "visibility", "allowedViewerUids", "expiresAtMillis", "createdAt", "updatedAt"]
+    },
+    "CallSession": {
+      "title": "CallSession",
+      "description": "Real-time Kotlin + WebRTC audio/video call signaling (SDP offer/answer), fallback media relay frames, and call history record.",
+      "type": "object",
+      "properties": {
+        "callerId": { "type": "string" },
+        "calleeId": { "type": "string" },
+        "memberUids": { "type": "array", "description": "2-element participant UIDs." },
+        "callerName": { "type": "string" },
+        "callerAvatar": { "type": "string" },
+        "calleeName": { "type": "string" },
+        "calleeAvatar": { "type": "string" },
+        "callType": { "type": "string", "enum": ["audio", "video"] },
+        "status": { "type": "string", "enum": ["ringing", "connected", "ended", "declined", "missed"] },
+        "durationSeconds": { "type": "integer" },
+        "webrtcEnabled": { "type": "boolean" },
+        "offerSdp": { "type": "string" },
+        "answerSdp": { "type": "string" },
+        "callerVideoFrame": { "type": "string" },
+        "calleeVideoFrame": { "type": "string" },
+        "callerAudioChunk": { "type": "string" },
+        "calleeAudioChunk": { "type": "string" },
+        "callerAudioSeq": { "type": "integer" },
+        "calleeAudioSeq": { "type": "integer" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["callerId", "calleeId", "memberUids", "callerName", "calleeName", "callType", "status", "durationSeconds", "callerAudioSeq", "calleeAudioSeq", "createdAt", "updatedAt"]
+    },
+    "IceCandidateSignal": {
+      "title": "IceCandidateSignal",
+      "description": "WebRTC ICE candidate exchanged between call participants.",
+      "type": "object",
+      "properties": {
+        "senderId": { "type": "string" },
+        "memberUids": { "type": "array" },
+        "sdpMid": { "type": "string" },
+        "sdpMLineIndex": { "type": "integer" },
+        "candidate": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["senderId", "memberUids", "sdpMid", "sdpMLineIndex", "candidate", "createdAt"]
+    },
+    "AiChatMessage": {
+      "title": "AiChatMessage",
+      "description": "Private user-scoped Linkora AI conversation message.",
+      "type": "object",
+      "properties": {
+        "role": { "type": "string", "enum": ["user", "model"] },
+        "text": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["role", "text", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/UserAccount" },
+      "description": "Owner-only private user profile and preferences."
+    },
+    "/users/{userId}/aiMessages/{messageId}": {
+      "schema": { "$ref": "#/entities/AiChatMessage" },
+      "description": "Owner-only saved Linkora AI conversation history."
+    },
+    "/publicProfiles/{userId}": {
+      "schema": { "$ref": "#/entities/PublicProfile" },
+      "description": "PII-free public profile for People discovery and online status."
+    },
+    "/usernames/{username}": {
+      "schema": { "$ref": "#/entities/UsernameClaim" },
+      "description": "Unique username reservation registry."
+    },
+    "/friendRequests/{requestId}": {
+      "schema": { "$ref": "#/entities/FriendRequest" },
+      "description": "Friend connection requests between Linkora users."
+    },
+    "/chats/{chatId}": {
+      "schema": { "$ref": "#/entities/ChatThread" },
+      "description": "Direct 1-on-1 and Group chat threads."
+    },
+    "/chats/{chatId}/messages/{messageId}": {
+      "schema": { "$ref": "#/entities/ChatMessage" },
+      "description": "Real-time messages within a chat thread."
+    },
+    "/stories/{storyId}": {
+      "schema": { "$ref": "#/entities/StoryItem" },
+      "description": "24-hour public or friends-only stories."
+    },
+    "/calls/{callId}": {
+      "schema": { "$ref": "#/entities/CallSession" },
+      "description": "Live WebRTC audio/video call signaling and call history logs."
+    },
+    "/calls/{callId}/iceCandidates/{candidateId}": {
+      "schema": { "$ref": "#/entities/IceCandidateSignal" },
+      "description": "WebRTC ICE candidates for peer-to-peer connection setup."
+    }
+  }
+}

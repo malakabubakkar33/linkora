@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Download Linkora for Android (Official APK)</title>
+  <meta name="description" content="Download Linkora official Android APK directly from your browser. Real-time messaging, Kotlin + WebRTC HD audio & video calls, 24h stories, and Linkora AI." />
+  <meta name="robots" content="index, follow" />
+  <meta property="og:title" content="Download Linkora for Android (Official APK)" />
+  <meta property="og:description" content="Fast real-time chat, WebRTC voice & video calls, 24h stories, and Linkora AI. Direct Android APK download." />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#3B5BDB" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Linkora",
+    "operatingSystem": "ANDROID",
+    "applicationCategory": "CommunicationApplication",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+  <style>
+    :root {
+      --bg: #F8FAFC;
+      --surface: #FFFFFF;
+      --surface-alt: #F1F5F9;
+      --primary: #3B5BDB;
+      --primary-dark: #2B45B5;
+      --aqua: #0EA5E9;
+      --green: #10B981;
+      --text: #0F172A;
+      --muted: #475569;
+      --border: #E2E8F0;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+    header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
+    .nav {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      font-size: 1.25rem;
+      color: var(--text);
+      text-decoration: none;
+    }
+    .logo-box {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #1E1B4B, #3B5BDB, #0EA5E9);
+      display: grid;
+      place-items: center;
+      box-shadow: 0 4px 12px rgba(59, 91, 219, 0.28);
+    }
+    .nav-btn {
+      background: var(--primary);
+      color: #fff;
+      text-decoration: none;
+      padding: 10px 18px;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 0.92rem;
+    }
+    .nav-btn:hover { background: var(--primary-dark); }
+    main {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 40px 20px 64px;
+    }
+    .hero {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      padding: 40px 28px;
+      text-align: center;
+      box-shadow: 0 8px 28px rgba(15, 23, 42, 0.05);
+    }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #E0E7FF;
+      color: #1E1B4B;
+      font-weight: 700;
+      font-size: 0.82rem;
+      padding: 6px 14px;
+      border-radius: 999px;
+      margin-bottom: 18px;
+    }
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--green);
+    }
+    h1 {
+      font-size: clamp(1.9rem, 5vw, 2.85rem);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 14px;
+    }
+    .subtitle {
+      max-width: 620px;
+      margin: 0 auto 28px;
+      color: var(--muted);
+      font-size: 1.04rem;
+    }
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, #3B5BDB, #2563EB);
+      color: #fff;
+      text-decoration: none;
+      padding: 16px 28px;
+      border-radius: 16px;
+      font-weight: 700;
+      font-size: 1.05rem;
+      box-shadow: 0 10px 24px rgba(59, 91, 219, 0.3);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 28px rgba(59, 91, 219, 0.36);
+    }
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--surface-alt);
+      color: var(--text);
+      text-decoration: none;
+      padding: 15px 22px;
+      border-radius: 16px;
+      font-weight: 600;
+      font-size: 0.96rem;
+      border: 1px solid var(--border);
+    }
+    .meta-strip {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 18px;
+      color: var(--muted);
+      font-size: 0.88rem;
+      margin-top: 8px;
+    }
+    .section-title {
+      font-size: 1.35rem;
+      font-weight: 800;
+      margin: 40px 0 16px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 14px;
+    }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 20px;
+    }
+    .card h3 {
+      font-size: 1.02rem;
+      margin-bottom: 6px;
+    }
+    .card p {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+    .steps {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 24px;
+      display: grid;
+      gap: 16px;
+    }
+    .step {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+    .step-num {
+      flex-shrink: 0;
+      width: 32px;
+      height: 32px;
+      border-radius: 10px;
+      background: #E0E7FF;
+      color: var(--primary);
+      font-weight: 800;
+      display: grid;
+      place-items: center;
+    }
+    .urdu-note {
+      margin-top: 12px;
+      padding: 14px 16px;
+      border-radius: 14px;
+      background: var(--surface-alt);
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.86rem;
+      margin-top: 44px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <a class="brand" href="#">
+        <div class="logo-box" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M4 6.5C4 5.12 5.12 4 6.5 4h11C18.88 4 20 5.12 20 6.5v8c0 1.38-1.12 2.5-2.5 2.5H10l-4.2 3.15A.5.5 0 0 1 5 19.75V17H6.5A2.5 2.5 0 0 1 4 14.5v-8Z" fill="#FFFFFF"/>
+            <circle cx="9" cy="10.5" r="1.4" fill="#3B5BDB"/>
+            <circle cx="12" cy="10.5" r="1.4" fill="#0EA5E9"/>
+            <circle cx="15" cy="10.5" r="1.4" fill="#F97316"/>
+          </svg>
+        </div>
+        <span>Linkora</span>
+      </a>
+      <a id="navDownloadBtn" class="nav-btn" href="./Linkora.apk" download="Linkora.apk">Download APK</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="pill">
+        <span class="dot"></span>
+        Official Android APK • Direct Browser Download
+      </div>
+      <h1>Chat, Call & Connect Instantly with Linkora</h1>
+      <p class="subtitle">
+        Download Linkora directly to your Android phone from Chrome or Google Browser — no Play Store required. Enjoy real-time chat, Kotlin + WebRTC voice & video calls, 24-hour stories, and Linkora AI.
+      </p>
+      <div class="cta-row">
+        <a id="mainDownloadBtn" class="btn-primary" href="./Linkora.apk" download="Linkora.apk">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="7 10 12 15 17 10"/>
+            <line x1="12" y1="15" x2="12" y2="3"/>
+          </svg>
+          Download Linkora APK
+        </a>
+        <a id="releaseMirrorBtn" class="btn-secondary" href="#install-steps">
+          How to Install
+        </a>
+      </div>
+      <div class="meta-strip">
+        <span>Version 1.0</span>
+        <span>•</span>
+        <span>61.8 MB • Signed Release APK</span>
+        <span>•</span>
+        <span>Android 7.0 (API 24) &amp; up</span>
+        <span>•</span>
+        <span>Package: com.aistudio.linkora.kxmrqv</span>
+      </div>
+    </section>
+
+    <h2 class="section-title">What’s Inside Linkora</h2>
+    <section class="grid">
+      <article class="card">
+        <h3>Real-Time Messaging &amp; Voice</h3>
+        <p>Instant text, voice notes, photos, videos, files, live location sharing, typing indicators, and hold-tap Delete for Me / Everyone.</p>
+      </article>
+      <article class="card">
+        <h3>Kotlin + WebRTC Calls</h3>
+        <p>Crystal-clear P2P HD audio and video calling with adaptive call quality and automatic fallback relay.</p>
+      </article>
+      <article class="card">
+        <h3>Heads-Up &amp; Lock-Screen Alerts</h3>
+        <p>Incoming messages arrive with sound at the top of your screen and on your mobile lock screen even when the app is closed.</p>
+      </article>
+      <article class="card">
+        <h3>Privacy, Locks &amp; Linkora AI</h3>
+        <p>PIN-locked chats, disappearing timers, archived mute, user blocking, 24h stories, and a built-in multilingual AI assistant.</p>
+      </article>
+    </section>
+
+    <h2 id="install-steps" class="section-title">How to Install from Browser (3 Easy Steps)</h2>
+    <section class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div>
+          <strong>Tap "Download Linkora APK" above</strong>
+          <p style="color: var(--muted); font-size: 0.93rem;">If Chrome asks "File might be harmful", tap <strong>Download anyway</strong> — this is the standard Android prompt for direct APK files.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div>
+          <strong>Open the downloaded Linkora.apk file</strong>
+          <p style="color: var(--muted); font-size: 0.93rem;">If prompted once by Android, tap <strong>Settings → Allow from this source</strong> for Chrome so Android can install the app.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div>
+          <strong>Tap Install &amp; Open Linkora</strong>
+          <p style="color: var(--muted); font-size: 0.93rem;">Sign in with Google or create your Linkora account to start chatting and calling friends right away.</p>
+        </div>
+      </div>
+      <div class="urdu-note">
+        <strong>Install Guide (Roman Urdu):</strong> Upar <em>Download Linkora APK</em> button par click karein, download complete hone par file open karein, agar phone pehli dafa permission mange to <em>Allow from this source</em> on karke <em>Install</em> kar lein.
+      </div>
+    </section>
+
+    <footer>
+      Linkora Messenger • Direct Android APK Distribution
+    </footer>
+  </main>
+
+  <script>
+    (function () {
+      // If hosted on GitHub Pages (<owner>.github.io/<repo>/), also link the mirror button to GitHub Releases
+      var host = window.location.hostname || "";
+      var pathParts = (window.location.pathname || "").split("/").filter(Boolean);
+      if (host.endsWith(".github.io") && pathParts.length >= 1) {
+        var owner = host.replace(".github.io", "");
+        var repo = pathParts[0];
+        var releaseUrl = "https://github.com/" + owner + "/" + repo + "/releases/latest/download/Linkora.apk";
+        var mirror = document.getElementById("releaseMirrorBtn");
+        if (mirror) {
+          mirror.href = releaseUrl;
+          mirror.textContent = "GitHub Release Mirror";
+        }
+      }
+    })();
+  </script>
+</body>
+</html>
